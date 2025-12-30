@@ -1,10 +1,18 @@
-import Link from "next/link";
+"use client";
+
+import { useMenu } from "@/hook/useMenu";
+import MenuItem from "./MenuItem";
 
 export default function Sidebar() {
+  const menu = useMenu();
+
   return (
-    <aside className="w-64 bg-gray-900 p-4 text-white">
-      <h2 className="mb-6 text-lg font-bold">System</h2>
-      <Link href="/dashboard">Dashboard</Link>
+    <aside className="w-64 border-r bg-white p-4">
+      <nav className="space-y-4">
+        {menu.map((item) => (
+          <MenuItem key={item.label} item={item} />
+        ))}
+      </nav>
     </aside>
   );
 }
