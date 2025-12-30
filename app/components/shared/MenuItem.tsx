@@ -1,30 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { MenuItem as Item } from "@/types/menu";
+import { MenuItemType } from "@/types/menu";
 
-export default function MenuItem({ item }: { item: Item }) {
-  if (item.children?.length) {
-    return (
-      <div className="space-y-1">
-        <p className="px-3 text-sm font-semibold text-gray-500">
+type Props = {
+  item: MenuItemType;
+  collapsed: boolean;
+};
+
+export default function MenuItem({ item, collapsed }: Props) {
+  const content = (
+    <>
+      {"icon" in item && item.icon && (
+        <span className="text-xl">{item.icon}</span>
+      )}
+      {!collapsed && (
+        <span className="text-sm font-medium">
           {item.label}
-        </p>
-        <div className="ml-3 space-y-1">
-          {item.children.map((child) => (
-            <MenuItem key={child.label} item={child} />
-          ))}
-        </div>
-      </div>
+        </span>
+      )}
+    </>
+  );
+
+  if ("href" in item) {
+    return (
+      <Link
+        href={item.href}
+        className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-gray-100 transition"
+      >
+        {content}
+      </Link>
     );
   }
 
   return (
-    <Link
-      href={item.path!}
-      className="block rounded px-3 py-2 text-sm text-black hover:bg-gray-100"
-    >
-      {item.label}
-    </Link>
+    <div className="flex items-center gap-3 rounded-md px-3 py-2 text-gray-500">
+      {content}
+    </div>
   );
 }

@@ -1,7 +1,13 @@
+import { ReactNode } from "react";
 
-export interface MenuItem {
-  label: string;
-  path?: string;
-  icon?: React.ReactNode;
-  children?: MenuItem[];
-}
+export type MenuItemType =
+  | {
+      label: string;
+      href: string;
+      icon?: ReactNode;
+    }
+  | {
+      label: string;
+      icon?: ReactNode;
+      children?: MenuItemType[];
+    };
