@@ -4,11 +4,11 @@ export const DASHBOARD_MENU: MenuItem[] = [
   {
     label: "Dashboard",
     path: "/",
-    icon: "mdi:view-dashboard", // Dashboard icon
+    icon: "mdi:view-dashboard",
   },
   {
     label: "Users",
-    icon: "mdi:account-group", // Group icon for "Users"
+    icon: "mdi:account-group",
     children: [
       {
         label: "All Users",
@@ -24,7 +24,7 @@ export const DASHBOARD_MENU: MenuItem[] = [
   },
   {
     label: "Settings",
-    icon: "mdi:cog", // Settings gear icon
+    icon: "mdi:cog",
     children: [
       {
         label: "Profile",
