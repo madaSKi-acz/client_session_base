@@ -9,17 +9,26 @@ import { MenuItem } from "@/types/menu";
 interface MenuGroupProps {
   item: MenuItem;
   isExpanded: boolean;
+  isReady?: boolean;   // ← NEW
 }
 
-export default function MenuGroup({ item, isExpanded }: MenuGroupProps) {
+export default function MenuGroup({ 
+  item, 
+  isExpanded, 
+  isReady = true   // ← default
+}: MenuGroupProps) {
   const [isOpen, setIsOpen] = useState(true);
 
-  // In collapsed mode: don't show header at all
   if (!isExpanded) {
     return (
       <>
         {item.children?.map((child) => (
-          <MenuItemComponent key={child.label} item={child} isExpanded={false} />
+          <MenuItemComponent 
+            key={child.label} 
+            item={child} 
+            isExpanded={false} 
+            isReady={isReady}
+          />
         ))}
       </>
     );
@@ -27,13 +36,13 @@ export default function MenuGroup({ item, isExpanded }: MenuGroupProps) {
 
   return (
     <div className="space-y-1">
-      {/* Group Header with Chevron */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-500 hover:text-gray-700 transition-colors"
       >
         <div className="flex items-center gap-2">
-          {item.icon && <Icon icon={item.icon} className="text-base" />}
+          {isReady && item.icon && <Icon icon={item.icon} className="text-base" />}
+          {!isReady && <div className="w-4 h-4 bg-gray-200 rounded animate-pulse" />}
           <span>{item.label}</span>
         </div>
         <ChevronDown
@@ -42,11 +51,15 @@ export default function MenuGroup({ item, isExpanded }: MenuGroupProps) {
         />
       </button>
 
-      {/* Collapsible Children */}
       {isOpen && (
         <div className="ml-4 space-y-1 border-l-2 border-gray-200 pl-4">
           {item.children?.map((child) => (
-            <MenuItemComponent key={child.label} item={child} isExpanded={true} />
+            <MenuItemComponent 
+              key={child.label} 
+              item={child} 
+              isExpanded={true} 
+              isReady={isReady}
+            />
           ))}
         </div>
       )}

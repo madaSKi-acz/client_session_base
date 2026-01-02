@@ -9,8 +9,9 @@ export default function RootPage() {
 
   useEffect(() => {
     api
-      .get("/api/user") // Laravel endpoint
-      .then(() => {
+      .get("/api/users") // Laravel endpoint
+      .then((res) => {
+        console.log(res, "user res")
         // Session exists
         router.replace("/dashboard");
       })

@@ -9,41 +9,40 @@ const SIDEBAR_PINNED_KEY = "sidebarPinned";
 
 export default function Sidebar() {
   const menu = useMenu();
+
+  // Server and first client render: always expanded → perfect hydration match
   const [isPinned, setIsPinned] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
-  // Load pinned state from localStorage after mount
-  // Replace this effect (the one causing the warning)
+  // Load real pinned state from localStorage AFTER mount (no warning + no hydration error)
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(SIDEBAR_PINNED_KEY);
-      if (saved !== null) {
-        setTimeout(() => setIsPinned(JSON.parse(saved)), 0);
-      }
-    } catch {
-      console.warn("Failed to load sidebar state");
-    }
-  }, []);
-
-  // With this version (warning-free)
-  useEffect(() => {
-    const loadPinnedState = async () => {
+    // Defer everything to the next tick to avoid direct setState in effect
+    const timer = setTimeout(() => {
       try {
         const saved = localStorage.getItem(SIDEBAR_PINNED_KEY);
         if (saved !== null) {
-          const value = JSON.parse(saved);
-          // Defer setState to next tick → no warning
-          setTimeout(() => {
-            setIsPinned(value);
-          }, 0);
+          setIsPinned(JSON.parse(saved));
         }
       } catch (e) {
-        console.warn("Failed to load sidebar state", e);
+        console.warn("Failed to load sidebar pinned state", e);
       }
-    };
 
-    loadPinnedState();
+      // Also mark icons as ready
+      setIsReady(true);
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, []);
+
+  // Save whenever isPinned changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(SIDEBAR_PINNED_KEY, JSON.stringify(isPinned));
+    } catch (e) {
+      console.warn("Failed to save sidebar pinned state", e);
+    }
+  }, [isPinned]);
 
   const isExpanded = isPinned || (!isPinned && isHovered);
 
@@ -52,16 +51,22 @@ export default function Sidebar() {
       onMouseEnter={() => !isPinned && setIsHovered(true)}
       onMouseLeave={() => !isPinned && setIsHovered(false)}
       className={`
-        h-screen w-${isExpanded ? "64" : "20"} border-r bg-white 
-        flex flex-col transition-all duration-300 ease-in-out
+        h-screen border-r bg-white flex flex-col 
+        transition-all duration-300 ease-in-out
+        ${isExpanded ? "w-64" : "w-20"}
       `}
     >
       <SidebarHeader
         isExpanded={isExpanded}
         isPinned={isPinned}
-        onTogglePin={() => setIsPinned(!isPinned)}
+        onTogglePin={() => setIsPinned(prev => !prev)}
       />
-      <SidebarMenu menu={menu} isExpanded={isExpanded} />
+
+      <SidebarMenu 
+        menu={menu} 
+        isExpanded={isExpanded}
+        isReady={isReady}
+      />
     </aside>
   );
 }
