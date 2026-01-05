@@ -3,7 +3,7 @@ import { MenuItem } from "@/types/menu";
 export const DASHBOARD_MENU: MenuItem[] = [
   {
     label: "Dashboard",
-    path: "/",
+    path: "/dashboard",
     icon: "mdi:view-dashboard",
   },
   {
