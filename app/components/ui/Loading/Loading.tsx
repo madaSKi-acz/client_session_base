@@ -1,0 +1,37 @@
+"use client";
+
+import "./loading.css";
+import Image from "next/image";
+
+export default function Loading() {
+  return (
+    <div className="flex h-screen flex-col items-center justify-center overflow-hidden">
+      {/* Logo + rings */}
+      <div className="relative h-16 w-16 flex items-center justify-center">
+        {/* Static ring */}
+        <span className="logo-ring animate-pulse" />
+
+        {/* Continuous waves */}
+        <span className="wave-ring" />
+        <span
+          className="wave-ring"
+          style={{ animationDelay: "-1.3s" }}
+        />
+
+        <div className="relative z-10 h-12 w-12 rounded-full flex items-center justify-center animate-pulse">
+          <Image
+            src="/images/logo.png"
+            alt="Loading"
+            width={28}
+            height={28}
+            priority
+          />
+        </div>
+      </div>
+
+      <p className="mt-4 text-sm font-semibold text-gray-500 animate-pulse italic">
+        Loading…
+      </p>
+    </div>
+  );
+}

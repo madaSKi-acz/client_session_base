@@ -1,0 +1,35 @@
+@keyframes cortana-wave {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.8;
+  }
+
+  40% {
+    opacity: 0.6;
+  }
+
+  60% {
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.wave-ring {
+  position: absolute;
+  inset: -200px;
+  border-radius: 9999px;
+  border: 3px solid var(--color-primary);
+  animation: cortana-wave 2.8s ease-out infinite;
+  pointer-events: none;
+}
+
+.logo-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid var(--color-primary);
+}
