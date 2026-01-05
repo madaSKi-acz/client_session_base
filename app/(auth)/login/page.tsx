@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import  api  from "@/lib/api";
 import Button from "@/app/components/ui/Button";
 import Input from "@/app/components/ui/Input";
+import { registerWebAuthn } from '@/utils/webauthn';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,6 +21,8 @@ export default function LoginPage() {
 
       await api.post("/api/login", { email, password });
 
+      await registerWebAuthn();
+      
       router.replace("/dashboard");
     } catch (error) {
       console.error("Login failed", error);
