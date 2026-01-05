@@ -33,11 +33,11 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-sm rounded-xl bg-white p-6 shadow-lg">
-      <h2 className="mb-4 text-xl font-semibold text-black">Login</h2>
+      <h2 className="mb-4 text-xl font-semibold text-green-300">Login</h2>
 
       <Input
         value={email}
-        className="bg-white text-black"
+        className="border-green-300 focus:ring-2 focus:ring-green-100"
         placeholder="Email"
         onChange={e => setEmail(e.target.value)}
       />
@@ -45,13 +45,13 @@ export default function LoginPage() {
       <Input
         value={password}
         type="password"
-        className="bg-white text-black"
+        className="border-green-300 focus:ring-2 focus:ring-green-100"
         placeholder="Password"
         onChange={e => setPassword(e.target.value)}
       />
 
-      <Button disabled={loading} onClick={handleLogin}>
-        {loading ? "Logging in..." : "Login"}
+      <Button className="w-full cursor-pointer" variant="primary" size="md" onClick={handleLogin}>
+        Login
       </Button>
     </div>
   );

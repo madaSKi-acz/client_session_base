@@ -3,17 +3,44 @@
 import { useState, useEffect } from "react";
 import SidebarHeader from "./SidebarHeader";
 import SidebarMenu from "./SidebarMenu";
+import SidebarFooter from "./SidebarFooter";
 import { useMenu } from "@/hook/useMenu";
+import { useRouter } from "next/navigation";
+import api from "@/lib/api";
+import { useConfirm } from "@/app/components/ui/confirm/ConfirmContext";
+
 
 const SIDEBAR_PINNED_KEY = "sidebarPinned";
 
 export default function Sidebar() {
   const menu = useMenu();
+  const router = useRouter();
+  const confirm = useConfirm();
 
   // Server and first client render: always expanded → perfect hydration match
   const [isPinned, setIsPinned] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [isReady, setIsReady] = useState(false);
+
+  const handleLogout = async () => {
+  const ok = await confirm({
+    title: "Logout",
+    description: "You will be logged out of your account.",
+    confirmText: "Logout",
+    cancelText: "Cancel",
+    danger: true,
+  });
+
+  if (!ok) return;
+
+  try {
+    await api.post("/api/logout"); // Laravel route
+    router.push("/login");
+  } catch (err) {
+    console.error("Logout failed", err);
+  }
+};
+
 
   // Load real pinned state from localStorage AFTER mount (no warning + no hydration error)
   useEffect(() => {
@@ -66,6 +93,11 @@ export default function Sidebar() {
         menu={menu} 
         isExpanded={isExpanded}
         isReady={isReady}
+      />
+
+      <SidebarFooter
+        isExpanded={isExpanded}
+        onLogout={handleLogout}
       />
     </aside>
   );

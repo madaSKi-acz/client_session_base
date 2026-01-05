@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import { ConfirmProvider } from "@/app/components/ui/confirm/ConfirmContext";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen">
-        {children}
+        <ConfirmProvider>
+          {children}
+        </ConfirmProvider>
       </body>
     </html>
   );

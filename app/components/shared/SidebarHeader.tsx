@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Menu } from "lucide-react";
 
 interface SidebarHeaderProps {
@@ -7,10 +8,18 @@ interface SidebarHeaderProps {
   onTogglePin: () => void;
 }
 
-export default function SidebarHeader({ isExpanded, isPinned, onTogglePin }: SidebarHeaderProps) {
+export default function SidebarHeader({
+  isExpanded,
+  isPinned,
+  onTogglePin,
+}: SidebarHeaderProps) {
   return (
     <div className="flex items-center justify-between p-4">
-      <div className="flex items-center gap-3 overflow-hidden">
+      {/* Logo → Dashboard */}
+      <Link
+        href="/dashboard"
+        className="flex items-center gap-3 overflow-hidden group"
+      >
         <Image
           src="/images/logo.png"
           alt="Logo"
@@ -18,24 +27,28 @@ export default function SidebarHeader({ isExpanded, isPinned, onTogglePin }: Sid
           height={isExpanded ? 48 : 36}
           className="flex-shrink-0 transition-all duration-300"
         />
-        {/* Optional: show app name when expanded */}
+
         {isExpanded && (
-          <span className="font-semibold text-lg truncate">My App</span>
+          <span className="font-semibold text-lg truncate group-hover:underline">
+            My App
+          </span>
         )}
-      </div>
+      </Link>
 
       {isExpanded && (
         <button
           onClick={onTogglePin}
-          className={`
-            p-2 rounded-full transition-all group cursor-pointer
-            ${isPinned 
-              ? "bg-green-500 text-white shadow-sm" 
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"}
-          `}
+          className={`p-2 rounded-full transition-all group cursor-pointer ${
+            isPinned
+              ? "text-green-300 shadow-sm"
+              : "text-black hover:bg-gray-200"
+          }`}
           title={isPinned ? "Unpin sidebar" : "Pin sidebar"}
         >
-          <Menu size={18} className="transition-transform group-hover:scale-110" />
+          <Menu
+            size={18}
+            className="transition-transform group-hover:scale-110"
+          />
         </button>
       )}
     </div>

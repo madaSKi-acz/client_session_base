@@ -10,7 +10,6 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  // ❌ Logged in → block login page
   if (hasSession && pathname.startsWith("/login")) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
