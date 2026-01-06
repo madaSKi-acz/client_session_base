@@ -3,9 +3,9 @@ import { ConfirmProvider } from "@/app/components/ui/confirm/ConfirmContext";
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
       <body className="min-h-screen">
