@@ -66,7 +66,7 @@ export default function MenuGroup({
         onClick={() => setIsOpen(!isOpen)}
         className={`
           w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider
-          transition-colors rounded-md
+          transition-colors rounded-md cursor-pointer
           ${hasActiveChild
             ? "text-green-300"
             : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
