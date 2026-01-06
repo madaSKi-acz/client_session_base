@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Loading() {
   return (
-    <div className="flex h-screen flex-col items-center justify-center overflow-hidden">
+    <div className="flex -m-6 absolute inset-0 bg-green-100/10 backdrop-blur-xs z-10 h-screen flex-col items-center justify-center">
       {/* Logo + rings */}
       <div className="relative h-16 w-16 flex items-center justify-center">
         {/* Static ring */}
