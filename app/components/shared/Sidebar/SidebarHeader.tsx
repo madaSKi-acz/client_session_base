@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 interface SidebarHeaderProps {
   isExpanded: boolean;
@@ -35,28 +35,15 @@ export default function SidebarHeader({
             priority
           />
         </div>
-
-        {isExpanded && (
-          <span className="font-semibold text-lg truncate group-hover:underline">
-            My App
-          </span>
-        )}
       </Link>
 
       {isExpanded && (
         <button
           onClick={onTogglePin}
-          className={`p-2 rounded-full transition-all group cursor-pointer ${
-            isPinned
-              ? "text-green-300 shadow-sm"
-              : "text-black hover:bg-gray-200"
-          }`}
+          className={`p-2 rounded-full transition-all cursor-pointer text-green-300`}
           title={isPinned ? "Unpin sidebar" : "Pin sidebar"}
         >
-          <Menu
-            size={18}
-            className="transition-transform group-hover:scale-110"
-          />
+          <Icon icon="hugeicons:sidebar-right" className="text-2xl" />
         </button>
       )}
     </div>
