@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import SidebarHeader from "./SidebarHeader";
 import SidebarMenu from "./SidebarMenu";
 import SidebarFooter from "./SidebarFooter";
@@ -9,16 +8,20 @@ import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import { useConfirm } from "@/app/components/ui/confirm/ConfirmContext";
 
-const SIDEBAR_PINNED_KEY = "sidebarPinned";
+interface SidebarProps {
+  isPinned: boolean;
+  onTogglePin: () => void;
+  isReady?: boolean; // Made optional – safe default behavior if not provided
+}
 
-export default function Sidebar() {
+export default function Sidebar({
+  isPinned,
+  onTogglePin,
+  isReady = true, // Default to true so it works even if parent doesn't pass it
+}: SidebarProps) {
   const menu = useMenu();
   const router = useRouter();
   const confirm = useConfirm();
-
-  // Server + first render: expanded
-  const [isPinned, setIsPinned] = useState(true);
-  const [isReady, setIsReady] = useState(false);
 
   const handleLogout = async () => {
     const ok = await confirm({
@@ -39,34 +42,6 @@ export default function Sidebar() {
     }
   };
 
-  // Load pinned state after mount
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      try {
-        const saved = localStorage.getItem(SIDEBAR_PINNED_KEY);
-        if (saved !== null) {
-          setIsPinned(JSON.parse(saved));
-        }
-      } catch (e) {
-        console.warn("Failed to load sidebar pinned state", e);
-      }
-
-      setIsReady(true);
-    }, 0);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Persist pinned state
-  useEffect(() => {
-    try {
-      localStorage.setItem(SIDEBAR_PINNED_KEY, JSON.stringify(isPinned));
-    } catch (e) {
-      console.warn("Failed to save sidebar pinned state", e);
-    }
-  }, [isPinned]);
-
-  // 🔑 Single source of truth
   const isExpanded = isPinned;
 
   return (
@@ -80,7 +55,7 @@ export default function Sidebar() {
       <SidebarHeader
         isExpanded={isExpanded}
         isPinned={isPinned}
-        onTogglePin={() => setIsPinned(prev => !prev)}
+        onTogglePin={onTogglePin}
       />
 
       <SidebarMenu

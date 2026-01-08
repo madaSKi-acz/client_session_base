@@ -15,25 +15,24 @@ export default function SidebarHeader({
 }: SidebarHeaderProps) {
   return (
     <div className="flex items-center justify-between p-4">
-      {/* Logo → Dashboard */}
       <Link
         href="/dashboard"
         className="flex items-center gap-3 overflow-hidden group"
       >
-        <div 
-          className="relative transition-all duration-300" 
-          style={{ 
-            width: isExpanded ? "48px" : "36px", 
-            height: isExpanded ? "48px" : "36px" 
+        <div
+          className="relative transition-all duration-300"
+          style={{
+            width: isExpanded ? "48px" : "36px",
+            height: isExpanded ? "48px" : "36px",
           }}
         >
-          <Image 
-            src="/images/logo.png" 
-            alt="Logo" 
+          <Image
+            src="/images/logo.png"
+            alt="Logo"
             fill
             sizes="48px"
-            className="object-contain" 
-            priority 
+            className="object-contain"
+            priority
           />
         </div>
 
