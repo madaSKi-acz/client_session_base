@@ -22,7 +22,6 @@ export default function UsersPage() {
     api
       .get("/api/users", { signal: controller.signal }) // Pass signal
       .then((res) => {
-        console.log("get user");
         const userData = Array.isArray(res.data) ? res.data : res.data.data;
         setUsers(userData || []);
       })

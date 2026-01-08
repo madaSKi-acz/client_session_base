@@ -18,12 +18,19 @@ export default function Loading() {
           style={{ animationDelay: "-1.3s" }}
         />
 
-        <div className="relative z-10 h-12 w-12 rounded-full flex items-center justify-center animate-pulse">
+        <div
+          className="relative z-10 h-12 w-12 rounded-full flex items-center justify-center animate-pulse"
+          style={{
+            width: "28px",
+            height: "28px"
+          }}
+        >
           <Image
             src="/images/logo.png"
             alt="Loading"
-            width={28}
-            height={28}
+            fill
+            sizes="28px"
+            className="loading-contain"
             priority
           />
         </div>
