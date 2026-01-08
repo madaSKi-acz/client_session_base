@@ -20,13 +20,22 @@ export default function SidebarHeader({
         href="/dashboard"
         className="flex items-center gap-3 overflow-hidden group"
       >
-        <Image
-          src="/images/logo.png"
-          alt="Logo"
-          width={isExpanded ? 48 : 36}
-          height={isExpanded ? 48 : 36}
-          className="flex-shrink-0 transition-all duration-300"
-        />
+        <div 
+          className="relative transition-all duration-300" 
+          style={{ 
+            width: isExpanded ? "48px" : "36px", 
+            height: isExpanded ? "48px" : "36px" 
+          }}
+        >
+          <Image 
+            src="/images/logo.png" 
+            alt="Logo" 
+            fill
+            sizes="48px"
+            className="object-contain" 
+            priority 
+          />
+        </div>
 
         {isExpanded && (
           <span className="font-semibold text-lg truncate group-hover:underline">
