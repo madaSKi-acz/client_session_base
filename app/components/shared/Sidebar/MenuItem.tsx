@@ -7,7 +7,7 @@ interface MenuItemProps {
   item: MenuItem;
   isExpanded: boolean;
   isReady?: boolean;
-  isActive?: boolean; // ← new prop
+  isActive?: boolean;
 }
 
 export default function MenuItemComponent({

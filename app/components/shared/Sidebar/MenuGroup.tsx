@@ -74,10 +74,21 @@ export default function MenuGroup({
         `}
       >
         <div className="flex items-center gap-2">
-          {isReady && item.icon && <Icon icon={item.icon} className="text-base" />}
-          {!isReady && <div className="w-4 h-4 bg-gray-200 rounded animate-pulse" />}
-          <span>{item.label}</span>
+          {!isReady && (
+            <div className="w-4 h-4 bg-gray-200 rounded animate-pulse" />
+          )}
+
+          {isReady && item.icon && (
+            <Icon icon={item.icon} className="text-base" />
+          )}
+
+          {!isReady && (
+            <div className="h-3 w-20 bg-gray-200 rounded animate-pulse" />
+          )}
+
+          {isReady && <span>{item.label}</span>}
         </div>
+
         <ChevronDown
           size={16}
           className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
