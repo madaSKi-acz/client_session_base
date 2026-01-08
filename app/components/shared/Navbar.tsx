@@ -1,17 +1,25 @@
 "use client";
 
-import  api  from "@/lib/api";
+import { Icon } from "@iconify/react";
 
-export default function Navbar() {
-  async function logout() {
-    await api.post("/logout");
-    window.location.href = "/login";
-  }
+interface NavbarProps {
+  onMenuClick: () => void;
+}
 
+export default function Navbar({ onMenuClick }: NavbarProps) {
   return (
-    <header className="flex justify-between border-b bg-white p-4">
-      <span className="font-semibold">Dashboard</span>
-      <button onClick={logout}>Logout</button>
+    <header className="h-16 border-b bg-white flex items-center px-4">
+      {/* Mobile sidebar button */}
+      <button
+        onClick={onMenuClick}
+        className="md:hidden cursor-ew-resize p-2 rounded-md hover:bg-gray-100 hover:text-green-300 text-gray-400"
+        aria-label="Open sidebar"
+      >
+        <Icon
+          icon="hugeicons:sidebar-right"
+          className="text-2xl"
+        />
+      </button>
     </header>
   );
 }

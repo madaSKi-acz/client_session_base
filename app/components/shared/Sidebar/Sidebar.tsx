@@ -79,7 +79,7 @@ export default function Sidebar() {
       onMouseLeave={() => !isPinned && setIsHovered(false)}
       className={`
         h-screen border-r bg-white flex flex-col 
-        transition-all duration-300 ease-in-out
+        transition-all duration-300 ease-in-out overflow-hidden
         ${isExpanded ? "w-64" : "w-20"}
       `}
     >
