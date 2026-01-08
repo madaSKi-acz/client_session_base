@@ -17,19 +17,32 @@ export default function UsersPage() {
   const router = useRouter();
 
   useEffect(() => {
+    const controller = new AbortController(); // Modern standard
+
     api
-      .get("/api/users")
+      .get("/api/users", { signal: controller.signal }) // Pass signal
       .then((res) => {
-        console.log("get user")
+        console.log("get user");
         const userData = Array.isArray(res.data) ? res.data : res.data.data;
         setUsers(userData || []);
       })
-      .catch(() => {
+      .catch((err) => {
+        // Check if error was due to abort (duplicate mount in dev)
+        if (err.name === "CanceledError" || err.name === "AbortError") {
+          console.log("Request canceled (normal in dev)");
+          return;
+        }
+        // Real error → redirect
         router.replace("/login");
       })
       .finally(() => {
         setLoading(false);
       });
+
+    // Cleanup: cancel request on unmount or second mount (Strict Mode)
+    return () => {
+      controller.abort();
+    };
   }, [router]);
 
   return (
