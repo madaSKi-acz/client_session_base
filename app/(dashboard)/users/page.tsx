@@ -20,6 +20,7 @@ export default function UsersPage() {
     api
       .get("/api/users")
       .then((res) => {
+        console.log("get user")
         const userData = Array.isArray(res.data) ? res.data : res.data.data;
         setUsers(userData || []);
       })

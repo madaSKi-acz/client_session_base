@@ -5,7 +5,7 @@ import Sidebar from "@/app/components/shared/Sidebar/Sidebar";
 import MobileSidebar from "@/app/components/shared/Sidebar/MobileSidebar";
 import Navbar from "@/app/components/shared/Navbar";
 import { useMenu } from "@/hook/useMenu";
-import { useSidebarPinned } from "@/hook/useSidebarPinned"; // adjust path if needed
+import { useSidebarPinned } from "@/hook/useSidebarPinned";
 
 export default function DashboardLayout({
   children,
@@ -14,7 +14,7 @@ export default function DashboardLayout({
 }) {
   const menu = useMenu();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { isPinned, togglePinned, setPinned, isLoaded } = useSidebarPinned();
+  const { isPinned, togglePinned, isLoaded } = useSidebarPinned();
 
   const handleMenuClick = () => {
     setMobileOpen(true);
@@ -45,6 +45,7 @@ export default function DashboardLayout({
         <Navbar
           onMenuClick={handleMenuClick}
           isPinned={isPinned}
+          isLoaded={isLoaded}
         />
         <main className="flex-1 overflow-auto p-6">{children}</main>
       </div>

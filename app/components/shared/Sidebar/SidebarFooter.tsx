@@ -1,7 +1,6 @@
 "use client";
 
 import { LogOut } from "lucide-react";
-import { Icon } from "@iconify/react";
 
 interface SidebarFooterProps {
   isExpanded: boolean;

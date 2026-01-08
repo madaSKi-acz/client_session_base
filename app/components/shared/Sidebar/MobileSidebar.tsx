@@ -22,6 +22,7 @@ export default function MobileSidebar({
   menu,
   isReady,
 }: MobileSidebarProps) {
+
   // Lock body scroll
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -34,13 +35,11 @@ export default function MobileSidebar({
 
   return (
     <div className="fixed inset-0 z-50 md:hidden">
-      {/* Backdrop */}
       <div
         onClick={onClose}
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
       />
 
-      {/* Drawer */}
       <aside className="absolute left-0 top-0 h-full w-72 bg-white shadow-xl flex flex-col animate-slide-in">
         <div className="flex items-center justify-between px-4 h-16 border-b">
           <Link
@@ -55,7 +54,6 @@ export default function MobileSidebar({
               height={36}
               className="flex-shrink-0"
             />
-            <span className="font-semibold text-lg">My App</span>
           </Link>
 
           <button
@@ -67,14 +65,12 @@ export default function MobileSidebar({
           </button>
         </div>
 
-        {/* Menu */}
         <SidebarMenu
           menu={menu}
           isExpanded={true}
           isReady={isReady}
         />
 
-        {/* Footer */}
         <SidebarFooter
           isExpanded={true}
           onLogout={() => {
