@@ -11,6 +11,7 @@ import { MenuItem } from "@/types/menu";
 interface MobileSidebarProps {
   open: boolean;
   onClose: () => void;
+  onLogout: () => void;
   menu: MenuItem[];
   isReady: boolean;
 }
@@ -18,6 +19,7 @@ interface MobileSidebarProps {
 export default function MobileSidebar({
   open,
   onClose,
+  onLogout,
   menu,
   isReady,
 }: Readonly<MobileSidebarProps>) {
@@ -88,9 +90,7 @@ export default function MobileSidebar({
 
         <SidebarFooter
           isExpanded={true}
-          onLogout={() => {
-            onClose();
-          }}
+          onLogout={onLogout}
         />
       </aside>
 

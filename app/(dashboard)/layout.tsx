@@ -66,6 +66,7 @@ export default function DashboardLayout({
       <MobileSidebar
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
+        onLogout={handleLogout}
         menu={menu}
         isReady={true}
       />
