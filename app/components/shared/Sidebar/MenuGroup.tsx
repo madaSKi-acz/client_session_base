@@ -21,16 +21,13 @@ export default function MenuGroup({
   const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
 
-  // Safely check if there are children
-  const children = item.children ?? []; // fallback to empty array
+  const children = item.children ?? [];
   const hasChildren = children.length > 0;
 
-  // Check if any child is active
   const hasActiveChild = children.some(
     (child) => child.path && pathname === child.path
   );
 
-  // If no children → treat as single menu item
   if (!hasChildren) {
     return (
       <MenuItemComponent
@@ -42,7 +39,6 @@ export default function MenuGroup({
     );
   }
 
-  // Collapsed sidebar: render children as icons
   if (!isExpanded) {
     return (
       <>
@@ -59,23 +55,22 @@ export default function MenuGroup({
     );
   }
 
-  // Expanded with children → group header + submenu
   return (
     <div className="space-y-1">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`
-          w-full flex items-center justify-between px-3 py-2 text-xs font-semibold uppercase tracking-wider
+          w-full flex items-center justify-between px-3 py-2 text-xs font-bold uppercase tracking-wider
           transition-colors rounded-md cursor-pointer
           ${hasActiveChild
-            ? "text-green-300"
-            : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+            ? "text-primary" 
+            : "text-app-fg/60 hover:text-app-fg hover:bg-secondary"
           }
         `}
       >
         <div className="flex items-center gap-2">
           {!isReady && (
-            <div className="w-4 h-4 bg-gray-200 rounded animate-pulse" />
+            <div className="w-4 h-4 bg-secondary animate-pulse rounded" />
           )}
 
           {isReady && item.icon && (
@@ -83,7 +78,7 @@ export default function MenuGroup({
           )}
 
           {!isReady && (
-            <div className="h-3 w-20 bg-gray-200 rounded animate-pulse" />
+            <div className="h-3 w-20 bg-secondary animate-pulse rounded" />
           )}
 
           {isReady && <span>{item.label}</span>}
@@ -96,7 +91,8 @@ export default function MenuGroup({
       </button>
 
       {isOpen && (
-        <div className="ml-4 space-y-1 border-l-2 border-gray-200 pl-4">
+        /* Using border-border (mapped to your secondary color) instead of gray-200 */
+        <div className="ml-4 space-y-1 border-l-2 border-border pl-4">
           {children.map((child) => (
             <MenuItemComponent
               key={child.label}

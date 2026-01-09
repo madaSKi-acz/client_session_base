@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
@@ -40,10 +42,13 @@ export default function SidebarHeader({
       {isExpanded && (
         <button
           onClick={onTogglePin}
-          className={`p-2 rounded-full transition-all cursor-pointer text-green-300`}
+          className={`p-2 rounded-full transition-all cursor-pointer text-primary`}
           title={isPinned ? "Unpin sidebar" : "Pin sidebar"}
         >
-          <Icon icon="hugeicons:sidebar-right" className="text-2xl" />
+          <Icon 
+            icon={isPinned ? "hugeicons:sidebar-left" : "hugeicons:sidebar-right"} 
+            className="text-2xl" 
+          />
         </button>
       )}
     </div>

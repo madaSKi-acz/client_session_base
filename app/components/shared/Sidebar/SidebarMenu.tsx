@@ -5,7 +5,7 @@ import MenuItemComponent from "./MenuItem";
 interface SidebarMenuProps {
   menu: MenuItem[];
   isExpanded: boolean;
-  isReady: boolean;   // ← NEW prop
+  isReady: boolean;
 }
 
 export default function SidebarMenu({ menu, isExpanded, isReady }: Readonly<SidebarMenuProps>) {
