@@ -10,7 +10,7 @@ interface SidebarMenuProps {
 
 export default function SidebarMenu({ menu, isExpanded, isReady }: Readonly<SidebarMenuProps>) {
   return (
-    <nav className="flex-1 overflow-y-auto p-3">
+    <nav className="flex-1 p-3">
       <div className="space-y-4">
         {menu.map((item) => {
           if (item.children && item.children.length > 0) {
