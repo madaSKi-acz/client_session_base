@@ -56,7 +56,7 @@ export default function UsersPage() {
               key={user.id ?? `user-${index}`}
               className="bg-white border border-gray-200 rounded-lg p-4 flex items-center space-x-4 shadow-sm hover:border-blue-300 transition-colors"
             >
-              <div className="h-12 w-12 shrink-0 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-semibold">
+              <div className="h-12 w-12 shrink-0 rounded-full bg-blue-50 flex items-center justify-center text-green-300 font-semibold">
                 {user.name?.charAt(0).toUpperCase() ?? "?"}
               </div>
 

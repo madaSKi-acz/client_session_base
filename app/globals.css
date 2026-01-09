@@ -1,32 +1,43 @@
 @import "tailwindcss";
 
-/* =========================
-   DESIGN TOKENS (Tailwind v4)
-   ========================= */
 @theme {
-  --color-primary: #13fc03;
-
-  --color-black: #000000;
-  --color-white: #ffffff;
-
-  --color-background: var(--color-white);
-  --color-foreground: var(--color-black);
+  /* 1. Define your base Palette */
+  --color-primary: #86efac;       /* green-300 */
+  --color-secondary: #f3f4f6;     /* gray-100 */
+  
+  /* 2. Map Semantic Colors */
+  --color-app-bg: #ffffff;
+  --color-app-fg: #000000;
+  --color-card: #f3f4f6b3;        /* gray-100/70 */
 }
 
 /* =========================
-   DARK MODE
+   DARK MODE OVERRIDES
    ========================= */
-@media (prefers-color-scheme: dark) {
-  @theme {
-    --color-background: var(--color-black);
-    --color-foreground: var(--color-white);
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer theme {
+  .dark {
+    /* Primary stays green but often looks better slightly adjusted for dark */
+    --color-primary: #4ade80;     /* green-400 for better contrast */
+    
+    /* Flip Backgrounds */
+    --color-app-bg: #000000;      /* black */
+    --color-app-fg: #ffffff;      /* white */
+    
+    /* Secondary becomes a dark surface color */
+    --color-secondary: #1f2937;   /* gray-800 */
+    --color-card: #111827b3;      /* gray-900/70 */
   }
 }
 
 /* =========================
    BASE STYLES
    ========================= */
-body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+@layer base {
+  body {
+    background-color: var(--color-app-bg);
+    color: var(--color-app-fg);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 }
