@@ -44,6 +44,7 @@ export default function MenuItemComponent({
   return (
     <Link
       href={item.path}
+      prefetch={false}
       className={`
         group relative flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium
         transition-all

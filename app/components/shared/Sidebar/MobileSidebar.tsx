@@ -63,7 +63,7 @@ export default function MobileSidebar({
                 fill
                 sizes="36px"
                 className="object-contain"
-                priority
+                priority={true}
               />
             </div>
           </Link>

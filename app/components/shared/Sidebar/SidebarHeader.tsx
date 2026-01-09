@@ -34,7 +34,7 @@ export default function SidebarHeader({
             fill
             sizes="48px"
             className="object-contain"
-            priority
+            priority={true}
           />
         </div>
       </Link>

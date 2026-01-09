@@ -31,7 +31,7 @@ export default function Loading() {
             fill
             sizes="28px"
             className="loading-contain"
-            priority
+            priority={true}
           />
         </div>
       </div>
