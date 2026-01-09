@@ -65,7 +65,7 @@ export default function DashboardLayout({
       {/* Mobile Sidebar Drawer */}
       <MobileSidebar
         open={mobileOpen}
-        onClose={handleMenuClick}
+        onClose={() => setMobileOpen(false)}
         menu={menu}
         isReady={true}
       />

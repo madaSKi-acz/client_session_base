@@ -30,8 +30,8 @@ export default function Loading() {
             alt="Loading"
             fill
             sizes="28px"
-            className="loading-contain"
-            priority={true}
+            className="object-contain"
+            priority={false}
           />
         </div>
       </div>
