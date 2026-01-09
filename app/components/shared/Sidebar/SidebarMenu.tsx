@@ -8,7 +8,7 @@ interface SidebarMenuProps {
   isReady: boolean;   // ← NEW prop
 }
 
-export default function SidebarMenu({ menu, isExpanded, isReady }: SidebarMenuProps) {
+export default function SidebarMenu({ menu, isExpanded, isReady }: Readonly<SidebarMenuProps>) {
   return (
     <nav className="flex-1 overflow-y-auto p-3">
       <div className="space-y-4">

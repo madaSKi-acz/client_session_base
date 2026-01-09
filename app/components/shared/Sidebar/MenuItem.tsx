@@ -15,7 +15,7 @@ export default function MenuItemComponent({
   isExpanded,
   isReady = true,
   isActive = false, // default false
-}: MenuItemProps) {
+}: Readonly<MenuItemProps>) {
   const pathname = usePathname();
 
   // Fallback if isActive not passed (though we always pass it now)

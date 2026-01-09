@@ -17,7 +17,7 @@ export default function MenuGroup({
   item,
   isExpanded,
   isReady = true,
-}: MenuGroupProps) {
+}: Readonly<MenuGroupProps>) {
   const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
 
