@@ -4,44 +4,23 @@ import SidebarHeader from "./SidebarHeader";
 import SidebarMenu from "./SidebarMenu";
 import SidebarFooter from "./SidebarFooter";
 import { useMenu } from "@/hook/useMenu";
-import { useRouter } from "next/navigation";
-import api from "@/lib/api";
-import { useConfirm } from "@/app/components/ui/confirm/ConfirmContext";
 
 interface SidebarProps {
   isPinned: boolean;
   onTogglePin: () => void;
-  isReady?: boolean; // Made optional – safe default behavior if not provided
+  isReady?: boolean;
+  onLogout: () => void
 }
 
 export default function Sidebar({
   isPinned,
   onTogglePin,
-  isReady = true, // Default to true so it works even if parent doesn't pass it
-}: SidebarProps) {
+  isReady = true,
+  onLogout
+}: Readonly<SidebarProps>) {
   const menu = useMenu();
-  const router = useRouter();
-  const confirm = useConfirm();
 
-  const handleLogout = async () => {
-    const ok = await confirm({
-      title: "Logout",
-      description: "You will be logged out of your account.",
-      confirmText: "Logout",
-      cancelText: "Cancel",
-      danger: true,
-    });
-
-    if (!ok) return;
-
-    try {
-      await api.post("/api/logout");
-      router.push("/login");
-    } catch (err) {
-      console.error("Logout failed", err);
-    }
-  };
-
+ 
   const isExpanded = isPinned;
 
   return (
@@ -66,7 +45,7 @@ export default function Sidebar({
 
       <SidebarFooter
         isExpanded={isExpanded}
-        onLogout={handleLogout}
+        onLogout={onLogout}
       />
     </aside>
   );

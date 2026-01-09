@@ -6,15 +6,44 @@ import MobileSidebar from "@/app/components/shared/Sidebar/MobileSidebar";
 import Navbar from "@/app/components/shared/Navbar";
 import { useMenu } from "@/hook/useMenu";
 import { useSidebarPinned } from "@/hook/useSidebarPinned";
+import { useConfirm } from "@/app/components/ui/confirm/ConfirmContext";
+import { useRouter } from "next/navigation";
+import api from "@/lib/api";
+
 
 export default function DashboardLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   const menu = useMenu();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isPinned, togglePinned, isLoaded } = useSidebarPinned();
+  const router = useRouter();
+  const confirm = useConfirm();
+
+
+  const handleLogout = async () => {
+    setMobileOpen(false);
+    
+    const ok = await confirm({
+      title: "Logout",
+      description: "You will be logged out of your account.",
+      confirmText: "Logout",
+      cancelText: "Cancel",
+      danger: true,
+    });
+
+  
+    if (!ok) return;
+
+    try {
+      await api.post("/api/logout");
+      router.push("/login");
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
 
   const handleMenuClick = () => {
     setMobileOpen(true);
@@ -29,13 +58,14 @@ export default function DashboardLayout({
           isPinned={isPinned}
           onTogglePin={togglePinned}
           isReady={isLoaded}
+          onLogout={handleLogout}
         />
       </div>
 
       {/* Mobile Sidebar Drawer */}
       <MobileSidebar
         open={mobileOpen}
-        onClose={() => setMobileOpen(false)}
+        onClose={handleLogout}
         menu={menu}
         isReady={true}
       />

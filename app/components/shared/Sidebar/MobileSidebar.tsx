@@ -21,7 +21,7 @@ export default function MobileSidebar({
   onClose,
   menu,
   isReady,
-}: MobileSidebarProps) {
+}: Readonly<MobileSidebarProps>) {
 
   // Lock body scroll
   useEffect(() => {
@@ -47,13 +47,22 @@ export default function MobileSidebar({
             onClick={onClose}
             className="flex items-center gap-3"
           >
-            <Image
-              src="/images/logo.png"
-              alt="Logo"
-              width={36}
-              height={36}
-              className="flex-shrink-0"
-            />
+            <div
+              className="relative transition-all duration-300"
+              style={{
+                width: "36px",
+                height: "36px",
+              }}
+            >
+              <Image
+                src="/images/logo.png"
+                alt="Logo"
+                fill
+                sizes="36px"
+                className="object-contain"
+                priority
+              />
+            </div>
           </Link>
 
           <button

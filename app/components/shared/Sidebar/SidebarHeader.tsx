@@ -12,7 +12,7 @@ export default function SidebarHeader({
   isExpanded,
   isPinned,
   onTogglePin,
-}: SidebarHeaderProps) {
+}: Readonly<SidebarHeaderProps>) {
   return (
     <div className="flex items-center justify-between p-4">
       <Link

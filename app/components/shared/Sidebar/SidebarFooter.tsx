@@ -10,7 +10,7 @@ interface SidebarFooterProps {
 export default function SidebarFooter({
   isExpanded,
   onLogout,
-}: SidebarFooterProps) {
+}: Readonly<SidebarFooterProps>) {
   return (
     <div className="border-t p-3">
       <button
@@ -19,9 +19,9 @@ export default function SidebarFooter({
           group relative w-full flex items-center gap-3 rounded-md px-3 py-2
           text-sm font-medium transition-all hover:text-red-300
           text-gray-700 cursor-pointer hover:bg-gray-100/70
-          ${!isExpanded ? "justify-center" : ""}
+          ${isExpanded ? "" : "justify-center"}
         `}
-        title={!isExpanded ? "Logout" : undefined}
+        title={isExpanded ? undefined : "Logout"}
       >
         <LogOut className={isExpanded ? "text-lg" : "text-xl"} />
 

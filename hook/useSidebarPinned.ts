@@ -1,10 +1,9 @@
-// src/hooks/useSidebarPinned.ts
 "use client";
 
 import { useEffect, useState } from "react";
 
 export function useSidebarPinned() {
-  const [isPinned, setIsPinned] = useState<boolean>(true); // default before load
+  const [isPinned, setIsPinned] = useState<boolean>(true);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Load from localStorage only after mount (client-side)
