@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { X } from "lucide-react";
 import SidebarMenu from "./SidebarMenu";
 import SidebarFooter from "./SidebarFooter";
 import { MenuItem } from "@/types/menu";
+import Logo from "@/app/components/ui/Logo";
 
 interface MobileSidebarProps {
   open: boolean;
@@ -52,22 +53,7 @@ export default function MobileSidebar({
             onClick={onClose}
             className="flex items-center gap-3"
           >
-            <div
-              className="relative transition-all duration-300"
-              style={{
-                width: "36px",
-                height: "36px",
-              }}
-            >
-              <Image
-                src="/images/logo.png"
-                alt="Logo"
-                fill
-                sizes="36px"
-                className="object-contain"
-                priority={false}
-              />
-            </div>
+            <Logo />
           </Link>
 
           {/* Close Button: Using secondary for hover state */}

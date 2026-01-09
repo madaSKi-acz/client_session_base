@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Logo from "@/app/components/ui/Logo";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 
@@ -21,22 +21,7 @@ export default function SidebarHeader({
         href="/dashboard"
         className="flex items-center gap-3 overflow-hidden group"
       >
-        <div
-          className="relative transition-all duration-300"
-          style={{
-            width: isExpanded ? "48px" : "36px",
-            height: isExpanded ? "48px" : "36px",
-          }}
-        >
-          <Image
-            src="/images/logo.png"
-            alt="Logo"
-            fill
-            sizes="48px"
-            className="object-contain"
-            priority={true}
-          />
-        </div>
+        <Logo priority={true}/>
       </Link>
 
       {isExpanded && (
