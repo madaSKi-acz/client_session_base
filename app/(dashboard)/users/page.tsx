@@ -17,10 +17,10 @@ export default function UsersPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const controller = new AbortController(); // Modern standard
+    const controller = new AbortController();
 
     api
-      .get("/api/users", { signal: controller.signal }) // Pass signal
+      .get("/api/users", { signal: controller.signal })
       .then((res) => {
         const userData = Array.isArray(res.data) ? res.data : res.data.data;
         setUsers(userData || []);
@@ -46,12 +46,11 @@ export default function UsersPage() {
 
   return (
     <div className="w-full relative">
-      {loading && <Loading />}
 
       <h1 className="text-xl font-bold mb-6 text-black">Team Members</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {users.length > 0 ? (
+        {users.length > 0 && !loading ? (
           users.map((user, index) => (
             <div
               key={user.id ?? `user-${index}`}
@@ -71,9 +70,7 @@ export default function UsersPage() {
               </div>
             </div>
           ))
-        ) : (
-          <p className="text-sm text-gray-500 italic">No members found.</p>
-        )}
+        ) : <Loading />}
       </div>
     </div>
   );
