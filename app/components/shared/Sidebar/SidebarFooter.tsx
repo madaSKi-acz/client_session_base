@@ -34,7 +34,7 @@ export default function SidebarFooter({
         {!isExpanded && (
           <span className="absolute left-full ml-2 px-2 py-1 text-xs font-medium 
             text-app-bg bg-app-fg rounded-md 
-            opacity-0 group-hover:opacity-100 transition-opacity 
+            opacity-0 group-hover:opacity-10 transition-opacity 
             whitespace-nowrap pointer-events-none z-10 shadow-sm"
           >
             Logout
