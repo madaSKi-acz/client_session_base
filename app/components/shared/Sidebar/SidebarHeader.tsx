@@ -16,18 +16,30 @@ export default function SidebarHeader({
   onTogglePin,
 }: Readonly<SidebarHeaderProps>) {
   return (
-    <div className="flex items-center justify-between p-4">
+    <div className="relative flex items-center h-16 px-4 overflow-hidden">
+      {/* Logo Container */}
       <Link
         href="/dashboard"
-        className="flex items-center gap-3 overflow-hidden group"
+        className="flex items-center group transition-all duration-300"
       >
-        <Logo priority={true}/>
+        <Logo 
+          size={36} 
+          priority={true} 
+          className="transition-transform duration-300"
+        />
       </Link>
 
-      {isExpanded && (
+      {/* Toggle Button - Slides in from the right when expanded */}
+      <div 
+        className={`absolute right-2 transition-all duration-300 ease-in-out ${
+          isExpanded 
+            ? "opacity-100 translate-x-0" 
+            : "opacity-0 translate-x-10 pointer-events-none"
+        }`}
+      >
         <button
           onClick={onTogglePin}
-          className={`p-2 rounded-full transition-all cursor-pointer text-primary`}
+          className="p-2 rounded-full transition-colors cursor-pointer text-primary hover:bg-secondary"
           title={isPinned ? "Unpin sidebar" : "Pin sidebar"}
         >
           <Icon 
@@ -35,7 +47,7 @@ export default function SidebarHeader({
             className="text-2xl" 
           />
         </button>
-      )}
+      </div>
     </div>
   );
 }
