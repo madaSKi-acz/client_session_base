@@ -1,14 +1,20 @@
 @import "tailwindcss";
 
+/* =========================
+   DESIGN TOKENS (Tailwind v4)
+   ========================= */
 @theme {
-  /* 1. Define your base Palette */
+  /* 1. Base Palette */
   --color-primary: #86efac;       /* green-300 */
   --color-secondary: #f3f4f6;     /* gray-100 */
   
-  /* 2. Map Semantic Colors */
-  --color-app-bg: #ffffff;
-  --color-app-fg: #000000;
+  /* 2. Semantic Colors */
+  --color-app-bg: #ffffff;        /* White */
+  --color-app-fg: #000000;        /* Black */
   --color-card: #f3f4f6b3;        /* gray-100/70 */
+  
+  /* 3. Border Token (Fixes the v4 auto-border issue) */
+  --color-border: var(--color-secondary); 
 }
 
 /* =========================
@@ -18,26 +24,37 @@
 
 @layer theme {
   .dark {
-    /* Primary stays green but often looks better slightly adjusted for dark */
-    --color-primary: #4ade80;     /* green-400 for better contrast */
+    --color-primary: #4ade80;     /* green-400 */
     
     /* Flip Backgrounds */
     --color-app-bg: #000000;      /* black */
     --color-app-fg: #ffffff;      /* white */
     
-    /* Secondary becomes a dark surface color */
+    /* Dark Surface Colors */
     --color-secondary: #1f2937;   /* gray-800 */
     --color-card: #111827b3;      /* gray-900/70 */
+    
+    /* Dark Border */
+    --color-border: #262626;      /* subtle dark neutral */
   }
 }
 
 /* =========================
-   BASE STYLES
+   BASE STYLES & RESETS
    ========================= */
 @layer base {
+  /* This reset prevents Tailwind v4 from adding default 
+     gray borders to your layout elements automatically.
+  */
+  *, ::after, ::before {
+    border-color: transparent;
+  }
+
   body {
     background-color: var(--color-app-bg);
     color: var(--color-app-fg);
     transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    font-family: inherit;
   }
 }

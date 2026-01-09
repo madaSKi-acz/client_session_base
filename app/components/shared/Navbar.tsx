@@ -8,7 +8,7 @@ interface NavbarProps {
   isLoaded: boolean; // From hook – tells us localStorage has been read
 }
 
-export default function Navbar({ onMenuClick, isPinned, isLoaded }: NavbarProps) {
+export default function Navbar({ onMenuClick, isPinned, isLoaded }: Readonly<NavbarProps>) {
   // Determine if desktop button should be visible AT ALL
   const showDesktopButton = isLoaded && !isPinned;
 
