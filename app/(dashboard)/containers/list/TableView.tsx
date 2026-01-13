@@ -22,9 +22,9 @@ export default function ContainerLogsTable({
     <div className="space-y-4">
       {/* Header (optional / dynamic) */}
       <div>
-        <h3 className="font-semibold text-app-fg">
-          {container ? `Logs — ${container.label}` : "Container Logs"}
-        </h3>
+        <span className="text-app-fg">
+          {container ? `Logs — ${container.label}` : "Container Log histories"}
+        </span>
 
         {startDate && endDate && (
           <p className="text-xs text-muted-foreground">

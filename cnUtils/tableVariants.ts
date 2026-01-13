@@ -16,7 +16,7 @@ export const tableVariants = cva(
 );
 
 export const thVariants = cva(
-  "px-4 py-2 text-left font-bold text-app-fg border-b border-r border-primary last:border-r-0 bg-primary/10",
+  "px-4 py-2 text-left text-app-fg border-b border-r border-primary last:border-r-0 bg-primary/10",
   {
     variants: {
       align: {
