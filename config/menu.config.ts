@@ -38,4 +38,20 @@ export const DASHBOARD_MENU: MenuItem[] = [
       },
     ],
   },
+  {
+    label: "Container",
+    icon: "proicons:container",
+    children: [
+      {
+        label: "container List",
+        path: "/containers/list",
+        icon: "clarity:list-solid",
+      },
+      {
+        label: "History",
+        path: "/containers/history",
+        icon: "hugeicons:transaction-history",
+      },
+    ],
+  },
 ];
