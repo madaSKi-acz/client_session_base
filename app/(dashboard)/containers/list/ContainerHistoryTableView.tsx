@@ -1,5 +1,4 @@
 // src/app/components/ContainerHistoryTableView.tsx
-
 "use client";
 
 import {
@@ -10,26 +9,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/app/components/ui/Customs/DynamiceTable";
-
 import { sampleTankData } from "@/data/ch";
 
 export default function ContainerHistoryTableView() {
+
+
   return (
     <div className="flex flex-col gap-5 h-full">
-      {/* Header with title + record count */}
       <div className="flex items-center justify-between px-1">
         <h6 className="text-lg font-bold tracking-tight">
           Container / Tank History
         </h6>
-        <p className="text-sm text-muted-foreground">
-          {sampleTankData.length} records
-        </p>
+       
       </div>
 
-      {/* Table wrapper with border + scroll */}
+      {/* Table wrapper */}
       <div className="relative flex-1 min-h-0 rounded-lg border-2 border-primary/80 bg-card shadow-md overflow-hidden">
         <div className="absolute inset-0 overflow-auto">
-          <Table className="border-separate border-spacing-0 min-w-max">
+                   <Table className="border-separate border-spacing-0 min-w-max">
             <TableHeader className="sticky top-0 z-20 bg-card shadow-sm">
               {/* Row 1 */}
               <TableRow className="border-b-2 border-primary/50">
@@ -306,10 +303,6 @@ export default function ContainerHistoryTableView() {
           </Table>
         </div>
       </div>
-
-      <p className="text-xs text-muted-foreground text-center pt-2">
-        Scroll horizontally to view all columns • First column stays fixed
-      </p>
     </div>
   );
 }
