@@ -2,11 +2,12 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/utils/ui";
 import { sampleTankData } from "@/data/ch";
 import { type RowData } from "@/utils/cn/table-config-ui";
 import { HistoryViewToggle } from "./HistoryViewToggle";
 import { TableView } from "./TableView";
-import { CardListView } from "./CardListView";
+import { DetailViewWithHeader } from "./DetailViewWithHeader";
 
 export default function ContainerHistoryTableView() {
   const [selectedNo, setSelectedNo] = useState<string | null>(null);
@@ -29,21 +30,28 @@ export default function ContainerHistoryTableView() {
         />
       </div>
 
-      <div className="relative flex-1 min-h-0 overflow-hidden">
-        <div className="absolute inset-0 overflow-auto p-1">
-          {viewMode === "table" ? (
-            <TableView
-              data={sampleTankData}
-              selectedNo={selectedNo}
-              onRowSelect={handleRowSelect}
-            />
-          ) : (
-            <CardListView
-              data={sampleTankData}
-              selectedNo={selectedNo}
-              onRowSelect={handleRowSelect}
-            />
-          )}
+      {/* ── Main scrollable container ── */}
+      <div className="relative flex-1">
+        {/* This div handles ALL scrolling (vertical + horizontal) */}
+        <div className="absolute inset-0 overflow-auto custom-scrollbar">
+          <div className={cn(
+            "min-h-full",
+            viewMode === "table" ? "min-w-max" : "w-full"
+          )}>
+            {viewMode === "table" ? (
+              <TableView
+                data={sampleTankData}
+                selectedNo={selectedNo}
+                onRowSelect={handleRowSelect}
+              />
+            ) : (
+              <DetailViewWithHeader
+                data={sampleTankData}
+                selectedNo={selectedNo}
+                onRowSelect={handleRowSelect}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
