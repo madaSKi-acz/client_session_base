@@ -8,7 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/app/components/ui/Customs/DynamiceTable";
+} from "@/app/components/ui/Customs/DynamicTable";
 import { sampleTankData } from "@/data/ch";
 
 export default function ContainerHistoryTableView() {
