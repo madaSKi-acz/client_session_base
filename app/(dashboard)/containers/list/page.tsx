@@ -9,7 +9,7 @@ import ContainerSelect, {
 import DateRangePicker from "@/app/components/ui/DatePicker/DateRangePicker";
 import { CONTAINER_OPTIONS } from "@/data/containers";
 
-import ContainerHistoryTableView from "./ContainerHistoryTableView";
+import ContainerHistoryTableView from "./ContainerHistoryView";
 
 export default function ContainerPage() {
   const [selectedContainer, setSelectedContainer] =
