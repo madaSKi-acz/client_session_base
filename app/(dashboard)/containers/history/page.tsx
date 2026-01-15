@@ -1,5 +1,4 @@
 // src/app/components/ContainerHistoryTableView.tsx
-
 "use client";
 
 import {
@@ -10,64 +9,72 @@ import {
   TableHeader,
   TableRow,
 } from "@/app/components/ui/Customs/DynamiceTable";
-
 import { sampleTankData } from "@/data/ch";
 
 export default function ContainerHistoryTableView() {
+  const headerRow1Height = 45;   // ← CHANGE THIS (px)
+  const headerRow2Height = 40;   // ← CHANGE THIS (px)
+  const headerRow3Top = headerRow1Height + headerRow2Height;
+  
   return (
     <div className="flex flex-col gap-5 h-full">
-      {/* Header with title + record count */}
       <div className="flex items-center justify-between px-1">
         <h6 className="text-lg font-bold tracking-tight">
           Container / Tank History
         </h6>
-        <p className="text-sm text-muted-foreground">
-          {sampleTankData.length} records
-        </p>
       </div>
 
-      {/* Table wrapper with border + scroll */}
-      <div className="relative flex-1 min-h-0 rounded-lg border-2 border-primary/80 bg-card shadow-md overflow-hidden">
+      {/* Table wrapper */}
+      <div className="relative flex-1 min-h-0 overflow-hidden">
         <div className="absolute inset-0 overflow-auto">
-          <Table className="border-separate border-spacing-0 min-w-max">
-            <TableHeader className="sticky top-0 z-20 bg-card shadow-sm">
-              {/* Row 1 */}
-              <TableRow className="border-b-2 border-primary/50">
+          <Table className="border-collapse collapse min-w-max">
+            <TableHeader className="bg-card">
+              {/* Row 1 - Top level groups */}
+              <TableRow>
                 <TableHead
                   rowSpan={3}
-                  className="sticky left-0 z-30 bg-secondary text-center font-semibold min-w-[64px] border-r border-primary/30"
+                  className="sticky left-0 top-0 z-30 bg-secondary text-center font-semibold min-w-[64px] align-middle"
                 >
                   No.
                 </TableHead>
-                <TableHead rowSpan={3} className="text-center font-semibold min-w-[96px] border-r border-primary/30">
+                <TableHead
+                  rowSpan={3}
+                  className={`text-center font-semibold min-w-[96px] bg-card align-middle`}
+                >
                   Quantity
                 </TableHead>
-                <TableHead rowSpan={3} className="min-w-[140px] font-semibold border-r border-primary/30">
+                <TableHead
+                  rowSpan={3}
+                  className={`min-w-[140px] font-semibold bg-card align-middle`}
+                >
                   Brand
                 </TableHead>
 
                 <TableHead
                   colSpan={11}
-                  className="text-center bg-primary/10 font-bold border-b-2 border-primary/50"
+                  className={`text-center bg-primary/10 font-bold`}
                 >
                   IMPORT
                 </TableHead>
 
                 <TableHead
                   colSpan={10}
-                  className="text-center bg-primary/5 font-bold border-b-2 border-primary/50"
+                  className={`text-center bg-primary/5 font-bold`}
                 >
                   EXPORT
                 </TableHead>
 
-                <TableHead rowSpan={3} className="text-center font-semibold min-w-[120px] border-r border-primary/30">
-                  Issue Date
+                <TableHead
+                  rowSpan={3}
+                  className={`text-center font-semibold min-w-[120px] bg-card align-middle`}
+                >
+                  issue Date
                 </TableHead>
 
                 <TableHead
                   colSpan={5}
                   rowSpan={2}
-                  className="text-center bg-amber-100/70 font-semibold border-b-2 border-amber-400/60"
+                  className={`text-center bg-amber-100/70 font-semibold border border-amber-400/60 align-middle`}
                 >
                   Delivery of Imported oil tank
                 </TableHead>
@@ -75,7 +82,7 @@ export default function ContainerHistoryTableView() {
                 <TableHead
                   colSpan={5}
                   rowSpan={2}
-                  className="text-center bg-blue-100/60 font-semibold border-b-2 border-blue-400/60"
+                  className={`text-center bg-blue-100/60 font-semibold border border-blue-400/60 align-middle`}
                 >
                   Re-delivery of tank
                 </TableHead>
@@ -83,79 +90,166 @@ export default function ContainerHistoryTableView() {
                 <TableHead
                   colSpan={5}
                   rowSpan={2}
-                  className="text-center bg-green-100/60 font-semibold border-b-2 border-green-400/60"
+                  className={`text-center bg-green-100/60 font-semibold border border-green-400/60 align-middle`}
                 >
-                  Tank Export (ref)
+                  tankr Export (ref)
                 </TableHead>
               </TableRow>
 
               {/* Row 2 */}
-              <TableRow className="border-b border-primary/40">
-                <TableHead rowSpan={2} className="text-center min-w-[120px] border-r border-primary/30">
-                  Company
+              <TableRow className="shadow-sm">
+                <TableHead
+                  rowSpan={2}
+                  className={`z-20 text-center min-w-[120px] bg-card align-middle`}
+                >
+                  company
                 </TableHead>
-                <TableHead colSpan={7} className="text-center border-b border-primary/30">
-                  INSERT / DISCHARGE FROM train
+                <TableHead
+                  colSpan={7}
+                  className={`z-20 text-center bg-card align-middle`}
+                >
+                  INSERT/DISCHARGE FROM train
                 </TableHead>
-                <TableHead colSpan={2} className="text-center border-b border-primary/30">
+                <TableHead
+                  colSpan={2}
+                  className={`z-20 text-center bg-card align-middle`}
+                >
                   DELIVER TO
                 </TableHead>
-                <TableHead rowSpan={2} className="text-center min-w-[70px] border-r border-primary/30">
+                <TableHead
+                  rowSpan={2}
+                  className={`z-20 text-center min-w-[70px] bg-card align-middle`}
+                >
                   unzip
                 </TableHead>
 
-                <TableHead rowSpan={2} className="text-center min-w-[120px] border-r border-primary/30">
-                  Company
+                <TableHead
+                  rowSpan={2}
+                  className={`z-20 text-center min-w-[120px] bg-card align-middle`}
+                >
+                  company
                 </TableHead>
-                <TableHead colSpan={5} className="text-center border-b border-primary/30">
-                  INSERT / LIFT-OFF FROM
+                <TableHead
+                  colSpan={5}
+                  className={`z-20 text-center bg-card align-middle`}
+                >
+                  INSERT/LIFT-OFF FROM
                 </TableHead>
-                <TableHead colSpan={4} className="text-center border-b border-primary/30">
-                  SHIP / LOAD TO train
+                <TableHead
+                  colSpan={4}
+                  className={`z-20 text-center bg-card align-middle`}
+                >
+                  SHIP/LOAD TO train
                 </TableHead>
               </TableRow>
 
-              {/* Row 3 */}
-              <TableRow className="bg-muted/60 border-b-2 border-primary/50">
-                <TableHead className="min-w-[100px] border-r border-primary/30">Status</TableHead>
-                <TableHead className="min-w-[80px] border-r border-primary/30">Cop</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">Tigger</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">plate code</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">Train</TableHead>
-                <TableHead className="min-w-[120px] border-r border-primary/30">Arrived date</TableHead>
-                <TableHead className="min-w-[110px] border-r border-primary/30">train no.</TableHead>
+              {/* Row 3 - most detailed headers */}
+              <TableRow className="bg-muted/60 shadow-sm">
+                <TableHead className={`z-20 min-w-[100px] bg-muted/60`}>
+                  Status
+                </TableHead>
+                <TableHead className={`z-20 min-w-[80px] bg-muted/60`}>
+                  Cop
+                </TableHead>
+                <TableHead className={`z-20 min-w-[100px] bg-muted/60`}>
+                  Tigger
+                </TableHead>
+                <TableHead className={`z-20 min-w-[100px] bg-muted/60`}>
+                  plate code
+                </TableHead>
+                <TableHead className={`z-20 min-w-[100px] bg-muted/60`}>
+                  Train
+                </TableHead>
+                <TableHead className={`z-20 min-w-[120px] bg-muted/60`}>
+                  Arrived date
+                </TableHead>
+                <TableHead className={`z-20 min-w-[110px] bg-muted/60`}>
+                  train no.
+                </TableHead>
 
-                <TableHead className="min-w-[120px] border-r border-primary/30">start Date</TableHead>
-                <TableHead className="min-w-[160px] border-r border-primary/30">port</TableHead>
+                <TableHead className={`z-20 min-w-[120px] bg-muted/60`}>
+                  start Date
+                </TableHead>
+                <TableHead className={`z-20 min-w-[160px] bg-muted/60`}>
+                  port
+                </TableHead>
 
-                <TableHead className="min-w-[130px] border-r border-primary/30">take down Date</TableHead>
-                <TableHead className="min-w-[110px] border-r border-primary/30">port</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">tigger</TableHead>
-                <TableHead className="min-w-[110px] border-r border-primary/30">plate number</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">Status</TableHead>
+                <TableHead className="z-20 min-w-[130px] border-r border-primary/30 bg-muted/60">
+                  take down Date
+                </TableHead>
+                <TableHead className="z-20 min-w-[110px] border-r border-primary/30 bg-muted/60">
+                  port
+                </TableHead>
+                <TableHead className="z-20 min-w-[100px] border-r border-primary/30 bg-muted/60">
+                  tigger
+                </TableHead>
+                <TableHead className="z-20 min-w-[110px] border-r border-primary/30 bg-muted/60">
+                  plate number
+                </TableHead>
+                <TableHead className="z-20 min-w-[100px] border-r border-primary/30 bg-muted/60">
+                  Status
+                </TableHead>
 
-                <TableHead className="min-w-[120px] border-r border-primary/30">Loaded train</TableHead>
-                <TableHead className="min-w-[120px] border-r border-primary/30">Arrived On</TableHead>
-                <TableHead className="min-w-[110px] border-r border-primary/30">train no</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">team</TableHead>
+                <TableHead className="z-20 min-w-[120px] border-r border-primary/30 bg-muted/60">
+                  Loaded train
+                </TableHead>
+                <TableHead className="z-20 min-w-[120px] border-r border-primary/30 bg-muted/60">
+                  Arrived On
+                </TableHead>
+                <TableHead className="z-20 min-w-[110px] border-r border-primary/30 bg-muted/60">
+                  train no
+                </TableHead>
+                <TableHead className="z-20 min-w-[100px] border-r border-primary/30 bg-muted/60">
+                  team
+                </TableHead>
 
-                <TableHead className="min-w-[120px] border-r border-primary/30">refe No.</TableHead>
-                <TableHead className="min-w-[110px] border-r border-primary/30">issue On</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">staff</TableHead>
-                <TableHead className="min-w-[160px] border-r border-primary/30">port</TableHead>
-                <TableHead className="min-w-[130px] border-r border-primary/30">actual_crt_dt</TableHead>
+                <TableHead className="z-20 min-w-[120px] border-r border-primary/30 bg-muted/60">
+                  refe No.
+                </TableHead>
+                <TableHead className="z-20 min-w-[110px] border-r border-primary/30 bg-muted/60">
+                  issue On
+                </TableHead>
+                <TableHead className="z-20 min-w-[100px] border-r border-primary/30 bg-muted/60">
+                  staff
+                </TableHead>
+                <TableHead className="z-20 min-w-[160px] border-r border-primary/30 bg-muted/60">
+                  port
+                </TableHead>
+                <TableHead className="z-20 min-w-[130px] border-r border-primary/30 bg-muted/60">
+                  actual_crt_dt
+                </TableHead>
 
-                <TableHead className="min-w-[110px] border-r border-primary/30">ref d No.</TableHead>
-                <TableHead className="min-w-[110px] border-r border-primary/30">start On</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">staff</TableHead>
-                <TableHead className="min-w-[160px] border-r border-primary/30">port</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">toke down</TableHead>
+                <TableHead className="z-20 min-w-[110px] border-r border-primary/30 bg-muted/60">
+                  ref d No.
+                </TableHead>
+                <TableHead className="z-20 min-w-[110px] border-r border-primary/30 bg-muted/60">
+                  start On
+                </TableHead>
+                <TableHead className="z-20 min-w-[100px] border-r border-primary/30 bg-muted/60">
+                  staff
+                </TableHead>
+                <TableHead className="z-20 min-w-[160px] border-r border-primary/30 bg-muted/60">
+                  port
+                </TableHead>
+                <TableHead className="z-20 min-w-[100px] border-r border-primary/30 bg-muted/60">
+                  toke down
+                </TableHead>
 
-                <TableHead className="min-w-[110px] border-r border-primary/30">ref d No.</TableHead>
-                <TableHead className="min-w-[110px] border-r border-primary/30">started On</TableHead>
-                <TableHead className="min-w-[100px] border-r border-primary/30">staff</TableHead>
-                <TableHead className="min-w-[160px] border-r border-primary/30">port</TableHead>
-                <TableHead className="min-w-[120px]">toke down Status</TableHead>
+                <TableHead className="z-20 min-w-[110px] border-r border-primary/30 bg-muted/60">
+                  ref d No.
+                </TableHead>
+                <TableHead className="z-20 min-w-[110px] border-r border-primary/30 bg-muted/60">
+                  started On
+                </TableHead>
+                <TableHead className="z-20 min-w-[100px] border-r border-primary/30 bg-muted/60">
+                  staff
+                </TableHead>
+                <TableHead className="z-20 min-w-[160px] border-r border-primary/30 bg-muted/60">
+                  port
+                </TableHead>
+                <TableHead className={`z-20 min-w-[120px] bg-muted/60`}>
+                  toke down Status
+                </TableHead>
               </TableRow>
             </TableHeader>
 
@@ -169,9 +263,7 @@ export default function ContainerHistoryTableView() {
                     hover:bg-muted/50 transition-colors
                   `}
                 >
-                  <TableCell
-                    className="sticky left-0 z-10 bg-secondary text-center font-medium whitespace-nowrap border-r border-primary/30"
-                  >
+                  <TableCell className="sticky left-0 z-10 bg-secondary text-center font-medium whitespace-nowrap border-r border-primary/30">
                     {row.no}
                   </TableCell>
 
@@ -182,13 +274,16 @@ export default function ContainerHistoryTableView() {
                     {row.brand}
                   </TableCell>
 
+                  {/* IMPORT columns */}
                   <TableCell className="whitespace-nowrap border-r border-border/50">
                     {row.company_import}
                   </TableCell>
                   <TableCell className="whitespace-nowrap border-r border-border/50">
                     {row.status_import}
                   </TableCell>
-                  <TableCell className="whitespace-nowrap border-r border-border/50">{row.cop}</TableCell>
+                  <TableCell className="whitespace-nowrap border-r border-border/50">
+                    {row.cop}
+                  </TableCell>
                   <TableCell className="whitespace-nowrap border-r border-border/50">
                     {row.tigger_import}
                   </TableCell>
@@ -253,6 +348,7 @@ export default function ContainerHistoryTableView() {
                     {row.issue_date}
                   </TableCell>
 
+                  {/* Delivery of Imported oil tank */}
                   <TableCell className="whitespace-nowrap border-r border-border/50">
                     {row.refe_no}
                   </TableCell>
@@ -269,6 +365,7 @@ export default function ContainerHistoryTableView() {
                     {row.actual_crt_dt}
                   </TableCell>
 
+                  {/* Re-delivery of tank */}
                   <TableCell className="whitespace-nowrap border-r border-border/50">
                     {row.ref_d_no_redelivery}
                   </TableCell>
@@ -285,6 +382,7 @@ export default function ContainerHistoryTableView() {
                     {row.toke_down}
                   </TableCell>
 
+                  {/* Tank Export (ref) */}
                   <TableCell className="whitespace-nowrap border-r border-border/50">
                     {row.ref_d_no_export}
                   </TableCell>
@@ -306,10 +404,6 @@ export default function ContainerHistoryTableView() {
           </Table>
         </div>
       </div>
-
-      <p className="text-xs text-muted-foreground text-center pt-2">
-        Scroll horizontally to view all columns • First column stays fixed
-      </p>
     </div>
   );
 }

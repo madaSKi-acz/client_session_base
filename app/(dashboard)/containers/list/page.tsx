@@ -2,16 +2,22 @@
 
 "use client";
 
-import React, { useState } from 'react';
-import ContainerSelect, { ContainerOption } from '@/app/components/ui/Select/SelectTwo';
-import DateRangePicker from '@/app/components/ui/DatePicker/DateRangePicker';
-import { CONTAINER_OPTIONS } from '@/data/containers';
+import React, { useState } from "react";
+import ContainerSelect, {
+  ContainerOption,
+} from "@/app/components/ui/Select/SelectTwo";
+import DateRangePicker from "@/app/components/ui/DatePicker/DateRangePicker";
+import { CONTAINER_OPTIONS } from "@/data/containers";
 
-import ContainerHistoryTableView from './ContainerHistoryTableView';
+import ContainerHistoryTableView from "./ContainerHistoryTableView";
 
 export default function ContainerPage() {
-  const [selectedContainer, setSelectedContainer] = useState<ContainerOption | null>(null);
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
+  const [selectedContainer, setSelectedContainer] =
+    useState<ContainerOption | null>(null);
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
+    null,
+    null,
+  ]);
   const [startDate, endDate] = dateRange;
 
   return (
@@ -44,8 +50,18 @@ export default function ContainerPage() {
         />
       </div>
 
-      <div className="flex-1 min-w-max isolate  overflow-x-auto scrollbar-thin">
-          <ContainerHistoryTableView />
+      <div
+        className="
+          flex-1              
+          min-h-[400px]
+          min-w-max 
+          isolate 
+          overflow-x-auto 
+          scrollbar-thin
+          py-4 lg:py-2 md:py-2
+        "
+      >
+        <ContainerHistoryTableView />
       </div>
     </div>
   );
